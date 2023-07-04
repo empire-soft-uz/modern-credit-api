@@ -17,6 +17,15 @@ async function getTotals(req: Request, res: Response): Promise<void> {
     res.status(500).json({ message: 'Server error' });
   }
 }
+async function getPayments(req:Request,res:Response):Promise<void>{
+  try{
+  const result =  await connectDB.query(creditsByMonthsQuery)
+
+  await res.status(200).json(result)
+  }catch(e){
+    await res.status(500).json(e);
+  }
+}
 
 async function getAllPayments(req:Request, res:Response):Promise<void>{
   const year = req.params
@@ -66,4 +75,4 @@ async function getMonthlyPayments(req: Request, res: Response): Promise<void>{
   }
 }
 
-export {getTotals,getMonthlyPayments,getAllPayments}
+export {getTotals,getMonthlyPayments,getAllPayments,getPayments}

@@ -45,7 +45,6 @@ export const registerNewUser = async (req: Request, res: Response) => {
         password:hashPassword
     })
     await newUser.save()
-    console.log(SECRET_KEY)
     const token = jwt.sign({email},`${SECRET_KEY}`,
         {expiresIn:3600000})
     res.status(201).json({ status: '201 ok', data:{ newUser,token} })

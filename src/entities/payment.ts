@@ -11,6 +11,7 @@ export class Payment extends BaseEntity{
 
     @Column()
     credit_id: number;
+    
     @ManyToOne(() => Credit, credit => credit.client,
     {
         onDelete:"CASCADE"
