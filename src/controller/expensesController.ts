@@ -1,6 +1,5 @@
 import { Request, Response } from 'express'
 import { Expenses } from '../entities/expenses'
-import { Client } from 'pg';
 const {totalProfit}  = require("../queries/mainPageQueries")
 import connectDB  from '../index';
 
@@ -47,4 +46,15 @@ export const getAllExpenses = async (req: Request, res: Response) => {
   }catch(error){
     res.status(400).json({msg:error})
   }
+  }
+
+
+  export const deleteExpense = async (req:Request,res:Response) =>{
+    const {id} = req.params
+    try{
+      const deleteExpense = Expenses.delete(parseInt(id))
+      res.status(200).json({status: '200ok', msg:"Expense deleted successfully"})
+    }catch(error){
+      res.status(400).json({msg:error})
+    }
   }
