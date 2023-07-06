@@ -53,7 +53,14 @@ async function getMonthlyPayments(req: Request, res: Response): Promise<void>{
   const month=yymm.split('-')[1];
   const result = await connectDB.query(creditsByMonthsQuery);  
   try {
-    if(year){
+     if (year && month) {
+      const data = result.filter((item: any) => {
+        const itemDate = new Date(item.date);
+        return itemDate.getFullYear() == Number(year) && itemDate.getMonth() + 1 == Number(month);
+      });
+      await res.status(200).json(data);
+    } 
+    else if(year){
       const data = result.filter((item: any) => {
         const itemDate = new Date(item.date);
         console.log(itemDate)
@@ -61,13 +68,7 @@ async function getMonthlyPayments(req: Request, res: Response): Promise<void>{
       });
       await res.status(200).json(data);
     }
-  else if (year && month) {
-      const data = result.filter((item: any) => {
-        const itemDate = new Date(item.date);
-        return itemDate.getFullYear() == Number(year) && itemDate.getMonth() + 1 == Number(month);
-      });
-      await res.status(200).json(data);
-    }else {
+    else {
       await res.status(200).json(result)
     }
   }catch(error){
