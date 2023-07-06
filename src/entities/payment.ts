@@ -24,9 +24,6 @@ export class Payment extends BaseEntity{
     })
     paid_amount:number;
 
-    @CreateDateColumn({
-        type: 'timestamp',
-        default: () => 'NOW()',
-    })
+    @Column({ type: 'date', default: () => 'DATE(NOW())'})
     duedate: Date;
 }
