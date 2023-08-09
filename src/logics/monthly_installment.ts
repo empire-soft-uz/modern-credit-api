@@ -8,20 +8,20 @@ let getYear = date.getFullYear();
 let getMonth = date.getMonth() + 1
 
 
-export const calcMonthlyPayments = (depositAmount: number, percent: number, period: number, date: any) => {
+export const calcMonthlyPayments = (year: any, month: any, day: any, depositAmount: number, percent: number, period: number) => {
     let values = []
 
 
     const total = ((depositAmount + (depositAmount * (percent % 100)) / 100) / period).toFixed(2);
 
-    for (let i = getMonth; i <= getMonth + period - 1; i++) {
+    for (let i = month; i <= month + period - 1; i++) {
         const monthIndex = i % 12; // Handle looping back to January after December
         const yearOffset = Math.floor(i / 12); // Adjust year if looping back
 
         values.push({
             amount: total,
             month: monthNames[monthIndex],
-            date: new Date(getYear + yearOffset, monthIndex, getDay)
+            date: new Date(year + yearOffset, monthIndex, day)
         });
 
     }

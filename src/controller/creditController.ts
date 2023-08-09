@@ -101,8 +101,17 @@ export const getAllCreditsByMonth = async (req: Request, res: Response) => {
     const date = element.duedate
     const credit = element.id
 
+
+    //Separate year,month,day from backend for the function below
+    const originDate = new Date(date)
+    const year = originDate.getFullYear()
+    const month = originDate.getMonth() + 1
+    const day = originDate.getDate()
+
+
+
     // console.log("data back", date)
-    const res = calcMonthlyPayments(depositAmount, percent, period, date)
+    const res = calcMonthlyPayments(year, month, day, depositAmount, percent, period)
 
     listItems.push(credit, res)
 
