@@ -27,9 +27,7 @@ export class Credit extends BaseEntity {
   @JoinColumn({ name: 'product_id' })
   product: Product
 
-  @Column({
-    nullable: true
-  })
+  @Column()
   client_deposit: number
 
   @Column()

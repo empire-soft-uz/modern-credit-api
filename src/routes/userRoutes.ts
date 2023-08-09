@@ -8,4 +8,4 @@ userRouter.post('/login', Users.loginUser)
 userRouter.get('/logout', Users.logOut)
 userRouter.get('/users', Users.allUsers)
 
-export { userRouter }
+export { userRouter } 

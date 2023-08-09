@@ -1,20 +1,16 @@
-import { Entity,BaseEntity,Column,PrimaryGeneratedColumn} from "typeorm";
+import { Entity, BaseEntity, Column, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('expenses')
-export class Expenses extends BaseEntity{
+export class Expenses extends BaseEntity {
     @PrimaryGeneratedColumn()
-    id:number
+    id: number
 
-    @Column({
-        default:0
-    })
-    amount:number;
+    @Column()
+    amount: number;
 
-    @Column({
-        nullable:true
-    })
-    description:string
+    @Column()
+    description: string
 
-    @Column({ type: 'date', default: () => 'DATE(NOW())'})
+    @Column({ type: 'date', default: () => 'DATE(NOW())' })
     duedate: Date;
 }

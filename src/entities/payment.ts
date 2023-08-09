@@ -1,29 +1,26 @@
-import { Entity,BaseEntity,Column,PrimaryGeneratedColumn,CreateDateColumn,ManyToOne,JoinColumn } from "typeorm";
+import { Entity, BaseEntity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from "typeorm";
 import { Credit } from "./credit";
 
 @Entity('payment')
-export class Payment extends BaseEntity{
+export class Payment extends BaseEntity {
     @PrimaryGeneratedColumn()
-    id:number
+    id: number
 
-    @Column({nullable:true})
-    index:number;
+    @Column({ nullable: true })
+    index: number;
 
     @Column()
     credit_id: number;
-    
-    @ManyToOne(() => Credit, credit => credit.client,
-    {
-        onDelete:"CASCADE"
-    })
-    @JoinColumn({name:'credit_id'})
-    credit:Credit
+    @ManyToOne(() => Credit, credit => credit.id,
+        {
+            onDelete: "CASCADE"
+        })
+    @JoinColumn({ name: 'credit_id' })
+    credit: Credit
 
-    @Column({
-        default:0
-    })
-    paid_amount:number;
+    @Column()
+    paid_amount: number;
 
-    @Column({ type: 'date', default: () => 'DATE(NOW())'})
+    @Column({ type: 'date', default: () => 'DATE(NOW())' })
     duedate: Date;
 }
